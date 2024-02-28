@@ -28,15 +28,14 @@ class User(db.Model):
     user_name = db.Column(db.String, nullable=False)
     user_email = db.Column(db.String, nullable=False)
     user_password = db.Column(db.String)
-    user_avatar = db.Column(db.String)
-    refresh_token = db.Column(db.String)
+    avatar_url = db.Column(db.String)
+    date_of_birth = db.Column(db.Date)
+    register_date = db.Column(db.Date)
+    country = db.Column(db.String)
+    city = db.Column(db.String)
 
-    steps = db.relationship('Steps', back_populates="user")
-    user_achievements = db.relationship(
-        'UserAchievements', back_populates="user")
-    user_challenges = db.relationship(
-        'UserChallenges', back_populates="user")
-
+    
+    
     def __repr__(self):
         return f"{self.user_name}"
 
@@ -47,8 +46,11 @@ class UserMessages(db.Model):
     __tablename__ = "user_messages"
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user_data.user_id"))
+    user_receiver_id = db.Column(db.Integer, db.ForeignKey("user_data.user_id"))
+    user_sender_id = db.Column(db.Integer, db.ForeignKey("user_data.user_id"))
     message = db.Column(db.String)
+    date = db.Column(db.Date)
+    status = db.Column(db.String)
 
 
 class UserPosts(db.Model):
@@ -81,10 +83,38 @@ class FriendRequest(db.Model):
     """Friend request data."""
     __tablename__ = "friend_request"
 
-    sender = db.Column(db.Integer, db.ForeignKey(
+    user_receiver_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_sender_id = db.Column(db.Integer, db.ForeignKey(
         "user_data.user_id"), primary_key=True)
-    receiver = db.Column(db.Integer, db.ForeignKey(
-        "user_data.user_id"), primary_key=True)
+    friendship_status = db.Column(db.Boolean)
+    friendship_start_date = db.Column(db.Date)
+    request_status = db.Column(db.String)
+
+
+
+
+
+Posts: id, date, user id, text, image url, status (posted, deleted, edited).
+
+Likes: id, date, post_id, user_id, number.+
+
+Dislike: id, date, post_id, user_id, number.-
+
+Adding friend: id, user_receiver_id, user_sender id, status, friend_request id.
+
+Removing friend:  id, user_receiver_id, user_sender id, status, friend_request id.
+
+Blocking friend:  id, user_receiver_id, user_sender id, status, friend_request id.
+
+avatar pics: id, user_id, url.
+
+
+
+
+
+
+
+
 
 
 if __name__ == "__main__":
