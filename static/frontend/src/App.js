@@ -1,9 +1,17 @@
-import logo from "./logo.svg";
+import React from "react";
 import "./App.css";
 import { useState, useEffect } from "react";
 
-function App() {
-  return <h2>ANT HIVE CONNECT</h2>;
-}
+import Login from "./components/login_form.jsx";
+import LikeButton from "./components/like_button.jsx";
+
+const App = () => {
+  return (
+    <div>
+      <Login />
+      <LikeButton />
+    </div>
+  );
+};
 
 export default App;
