@@ -34,8 +34,6 @@ class User(db.Model):
     country = db.Column(db.String)
     city = db.Column(db.String)
 
-    
-    
     def __repr__(self):
         return f"{self.user_name}"
 
@@ -46,7 +44,8 @@ class UserMessages(db.Model):
     __tablename__ = "user_messages"
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_receiver_id = db.Column(db.Integer, db.ForeignKey("user_data.user_id"))
+    user_receiver_id = db.Column(
+        db.Integer, db.ForeignKey("user_data.user_id"))
     user_sender_id = db.Column(db.Integer, db.ForeignKey("user_data.user_id"))
     message = db.Column(db.String)
     date = db.Column(db.Date)
@@ -83,7 +82,8 @@ class FriendRequest(db.Model):
     """Friend request data."""
     __tablename__ = "friend_request"
 
-    user_receiver_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_receiver_id = db.Column(
+        db.Integer, autoincrement=True, primary_key=True)
     user_sender_id = db.Column(db.Integer, db.ForeignKey(
         "user_data.user_id"), primary_key=True)
     friendship_status = db.Column(db.Boolean)
@@ -91,30 +91,19 @@ class FriendRequest(db.Model):
     request_status = db.Column(db.String)
 
 
+# Posts: id, date, user id, text, image url, status (posted, deleted, edited).
 
+# Likes: id, date, post_id, user_id, number.+
 
+# Dislike: id, date, post_id, user_id, number.-
 
-Posts: id, date, user id, text, image url, status (posted, deleted, edited).
+# Adding friend: id, user_receiver_id, user_sender id, status, friend_request id.
 
-Likes: id, date, post_id, user_id, number.+
+# Removing friend:  id, user_receiver_id, user_sender id, status, friend_request id.
 
-Dislike: id, date, post_id, user_id, number.-
+# Blocking friend:  id, user_receiver_id, user_sender id, status, friend_request id.
 
-Adding friend: id, user_receiver_id, user_sender id, status, friend_request id.
-
-Removing friend:  id, user_receiver_id, user_sender id, status, friend_request id.
-
-Blocking friend:  id, user_receiver_id, user_sender id, status, friend_request id.
-
-avatar pics: id, user_id, url.
-
-
-
-
-
-
-
-
+# avatar pics: id, user_id, url.
 
 
 if __name__ == "__main__":

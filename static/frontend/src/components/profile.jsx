@@ -1,11 +1,11 @@
-import UploadAndDisplayImage from "./profilePic.jsx";
+// import UploadAndDisplayImage from "./profilePic.jsx";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 function ProfileCard() {
   return (
     <Card style={{ width: "18rem" }}>
-      <UploadAndDisplayImage />
+      {/* <UploadAndDisplayImage /> */}
       <Card.Body>
         <Card.Title>Card Title</Card.Title>
         <Card.Text>

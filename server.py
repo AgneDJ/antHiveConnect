@@ -19,13 +19,20 @@ app.secret_key = os.environ.get("APP_SECRET_KEY", None)
 app.jinja_env.undefined = StrictUndefined
 
 
-@app.route("/")
-def homepage():
-    """View homepage."""
+@app.route("/friends")
+def friends():
+    """View friends."""
 
-    return render_template("homepage.html")
+    return {"friends": ["Friend1", "Friend2", "Friend3"]}
+
+
+@app.route("/register")
+def register():
+    """View Signup form."""
+
+    return {"friends": ["Friend1", "Friend2", "Friend3"]}
 
 
 if __name__ == "__main__":
     connect_to_db(app)
-    app.run(host="0.0.0.0")
+    app.run(debug=True)
